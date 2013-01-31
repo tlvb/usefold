@@ -28,7 +28,7 @@ of the folded block in the fold comment.
         }
     }
 
-Assuming the cursor is placed on line 5, the initialization of the for loop,
+Assuming the cursor is placed on line 3, the initialization of the for loop,
 
 - running **Usefold_FromHere()** will append opening and closing markers on line 3 and line 5 respectively.
 - running **Usefold_FromInside()** will append opening and closing markers on line 1 and line 6 respectively.
