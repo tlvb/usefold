@@ -1,4 +1,4 @@
-Usefold
+usefold
 ========
 
 vimscript to simplify manual fold creation
