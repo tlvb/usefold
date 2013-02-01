@@ -1,0 +1,68 @@
+usefold.txt	For Vim version 7.3	Last change 2013 February 1
+							*Usefold*
+Usefold v0.0.0~
+
+Usefold provides functionality to ease putting fold markers based
+on indentation when using the marker foldmethod. No maps are
+provided by default but has to be set up by the user.
+
+							*Usefold_Folder()*
+Usefold_Folder({lnum})
+	Creates a fold beginning on {lnum} and ending on the next line
+	with the same indent level (|indent()|) as the beginning line.
+
+	If 'filetype' is python, the fold marker is created between
+	the last line that is indented more than the beginning line
+	and the the line that has the same indentation as the beginning
+	line.
+
+	Blank lines, and lines containing only whitespace are not
+	checked for indent level and will not be seen as ending a
+	block. In the python case, if the end of a code block is followed
+	by empty/whitespace, the mark is created as soon as possible,
+	at the end of the block.
+
+							*Usefold_FromHere()*
+Usefold_FromHere()
+	Simple wrapper that calls Usefold_Folder on the current line
+
+							*Usefold_FromInside()*
+Usefold_FromInside()
+	Checks the indentation on the current line, and searches for the
+	first line above it that is indented less, then calls
+	|Usefold_Folder()| on it.
+
+							*Usefold_foldtext()*
+Usefold_foldtext()
+	Alternative |foldtext()| implementation that preserves
+	indent, and concatenates the code of the opening and
+	closing lines.
+
+==============================================================================
+
+Example~
+>
+	1	int foo(void) {
+	2		do_stuff();
+	3		for(int i=0; i<128; ++i) {
+	4			do_other_stuff();
+	5		}
+	6	}
+<
+If the cursor is placed somewhere on line 3 in the code above;
+- executing |Usefold_FoldHere()| appends fold markers to line 3 and 5
+- executing |Usefold_FromInside()| appends fold markers to line 1 and 6
+
+==============================================================================
+
+Bugs~
+- Calling |Usefold_FromInside()| on an empty line behaves as specified,
+  but perhaps not as one would expect, or want
+- |Usefold_foldtext()| does not properly remove the fold markers from
+  the fold line for old style (/**/) comments.
+
+Changelog~
+
+v0.0.0		main functionality, doc writing
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -24,7 +24,6 @@ function! Usefold_Folder(fblno) "{{{
 		call setline(a:fblno, substitute(getline(a:fblno), '$', ' '.fbeg, ''))
 		call setline(felno, substitute(getline(felno), '$', ' '.fend, ''))
 	endif
-
 endfunction "}}}
 
 function! Usefold_FromHere() "{{{
