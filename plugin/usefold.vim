@@ -3,6 +3,10 @@ function! Usefold_Folder(fblno) "{{{
 	let fbeg = printf(&commentstring, fmarks[0])
 	let fend = printf(&commentstring, fmarks[1])
 	let il = indent(a:fblno)
+	if match(getline("."), '\S') == -1
+		echoerr "Trying to fold beginning on an empty line"
+		return
+	endif
 	let felno = a:fblno + 1
 	let lnosav = felno
 	while (indent(felno) > il || match(getline(felno), '\S') == -1) && indent(felno) != -1
@@ -29,6 +33,21 @@ endfunction "}}}
 function! Usefold_FromHere() "{{{
 	call Usefold_Folder(line('.'))
 endfunction "}}}
+
+function! Usefold_FromHereUp()
+	let l = line('.')
+	while match(getline(l), '\S') == -1 && l > 0
+		let l = l - 1
+	endwhile
+	let il = indent(l)
+	let l = l-1
+	while l > 0 && (indent(l) > il || match(getline(l), '\S') == -1)
+		let l = l - 1
+	endwhile
+	if indent(l) > -1
+		call Usefold_Folder(l)
+	endif
+endfunction
 
 function! Usefold_FromInside() "{{{
 	let l = line('.')

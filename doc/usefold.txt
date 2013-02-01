@@ -1,12 +1,12 @@
 usefold.txt	For Vim version 7.3	Last change 2013 February 1
-							*Usefold*
-Usefold v0.0.1~
+						*Usefold*
+Usefold v0.0.2~
 
 Usefold provides functionality to ease putting fold markers based
 on indentation when using the marker foldmethod. No maps are
 provided by default but has to be set up by the user.
 
-							*Usefold_Folder()*
+						*Usefold_Folder()*
 Usefold_Folder({lnum})
 	Creates a fold beginning on {lnum} and ending on the next line
 	with the same indent level (|indent()|) as the beginning line.
@@ -22,17 +22,21 @@ Usefold_Folder({lnum})
 	by empty/whitespace, the mark is created as soon as possible,
 	at the end of the block.
 
-							*Usefold_FromHere()*
+						*Usefold_FromHere()*
 Usefold_FromHere()
-	Simple wrapper that calls Usefold_Folder on the current line
+	Simple wrapper that calls |Usefold_Folder()| on the current line
 
-							*Usefold_FromInside()*
+						*Usefold_FromHereUp()*
+Usefold_FromeHereUp()
+	Same as |Usefold_FoldHere()| but travels upwards
+
+						*Usefold_FromInside()*
 Usefold_FromInside()
 	Checks the indentation on the current line, and searches for the
 	first line above it that is indented less, then calls
 	|Usefold_Folder()| on it.
 
-							*Usefold_foldtext()*
+						*Usefold_foldtext()*
 Usefold_foldtext()
 	Alternative |foldtext()| implementation that preserves
 	indent, and concatenates the code of the opening and
@@ -41,6 +45,7 @@ Usefold_foldtext()
 ==============================================================================
 
 Example~
+
 >
 	1	int foo(void) {
 	2		do_stuff();
@@ -56,11 +61,13 @@ If the cursor is placed somewhere on line 3 in the code above;
 ==============================================================================
 
 Bugs~
+
 - Calling |Usefold_FromInside()| on an empty line behaves as specified,
   but perhaps not as one would expect, or want
 
 Changelog~
 
+v0.0.2	added |Usefold_FromHereUp()|
 v0.0.1	fixed regex bug
 v0.0.0	main functionality, doc writing
 
