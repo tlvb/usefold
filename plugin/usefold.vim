@@ -51,8 +51,10 @@ function! Usefold_foldtext() "{{{
 	let fmarks = split(&foldmarker, ',')
 	let fbeg = printf(&commentstring, fmarks[0])
 	let fend = printf(&commentstring, fmarks[1])
-	let fbline = substitute(getline(v:foldstart), '^\s*\(.\{-}\)\s*'.fbeg.'$' , '\1', '')
-	let feline = substitute(getline(v:foldend), '\s*\(\S*\)\s*'.fend.'$' , '\1', '')
+	let fbegx = escape(fbeg, '\')
+	let fendx = escape(fend, '\')
+	let fbline = substitute(getline(v:foldstart), '\v^\s*(.{-})\s*\V'.fbegx.'\v.*$' , '\1', '')
+	let feline = substitute(getline(v:foldend), '\v^\s*(.{-})\s*\V'.fendx.'\v.*$' , '\1', '')
 	let linec = v:foldend - v:foldstart - 1
 	let linecs = 'lines'
 	if linec == 1

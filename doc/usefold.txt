@@ -1,6 +1,6 @@
 usefold.txt	For Vim version 7.3	Last change 2013 February 1
 							*Usefold*
-Usefold v0.0.0~
+Usefold v0.0.1~
 
 Usefold provides functionality to ease putting fold markers based
 on indentation when using the marker foldmethod. No maps are
@@ -58,11 +58,10 @@ If the cursor is placed somewhere on line 3 in the code above;
 Bugs~
 - Calling |Usefold_FromInside()| on an empty line behaves as specified,
   but perhaps not as one would expect, or want
-- |Usefold_foldtext()| does not properly remove the fold markers from
-  the fold line for old style (/**/) comments.
 
 Changelog~
 
-v0.0.0		main functionality, doc writing
+v0.0.1	fixed regex bug
+v0.0.0	main functionality, doc writing
 
  vim:tw=78:ts=8:ft=help:norl:
